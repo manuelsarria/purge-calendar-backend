@@ -1,15 +1,14 @@
 const express = require('express');
+require('dotenv').config();
 
 const app =  express();
 
+// Directorio publico
+app.use( express.static('public'));
 
 //rutas
-app.get('/', (req, res) => {
-  res.json({
-    ok: true,
-  })
-})
+app.use('/api/auth', require('./routes/auth'));
 
-app.listen( 4000, () => {
-  console.log(`servidor corriendo en puerto ${4000}`)
+app.listen( process.env.PORT, () => {
+  console.log(`servidor corriendo en puerto ${ process.env.PORT }`)
 });
