@@ -83,10 +83,16 @@ const loginUser = async(req, res = response) => {
   }
 }
 
-const renewToken = (req, res = response) => {
+const renewToken = async(req, res = response) => {
+
+  const { uid, name } = req;
+
+  // Generar nuevo token y retornarlo a la peticion - ya el middleware lo valido.
+  const token = await generateJWT( uid, name);
+
   res.json({
     ok: true,
-    msg: 'renew'
+    token
   })
 }
 
